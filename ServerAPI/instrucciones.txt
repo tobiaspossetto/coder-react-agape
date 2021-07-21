@@ -1,0 +1,25 @@
+instalar la API
+*abrir consola dentro de la carpeta SERVER
+escribir: npm install
+esperar que se instale los modulos
+escribir: nodemon
+#escribir nodemon  inicia la api en el puerto 4000 de su PC
+
+Llamadas a las API
+
+#OBTENER TODOS LOS PRODUCTOS DE LA LISTA
+#NO RECIBE PARAMETROS
+http://localhost:4000/products
+
+#OBTENER UN PRODUCTO DE LA LISTA
+#RECIBE EL ID DEL PRODUCTO A BUSCAR
+http://localhost:4000/product/:id
+EJEMPLO: http://localhost:4000/product/1
+
+#OBTENER PRODUCTOS CON UNA CATEGORIA ESPECIFICA
+#RECIBE LA CATEGORIA DEL PRODUCTO A BUSCAR
+http://localhost:4000/product/category/:categoryID
+EJEMPLO: http://localhost:4000/product/category/Procesadores
+
+
+

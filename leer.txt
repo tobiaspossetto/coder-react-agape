@@ -1,0 +1,27 @@
+
+utilizo Bootstrap-React, MaterialUI, React-icons, Axios(en reemplazo de fetch)
+
+Quiero aclarar que uso  las  2 librerias (react - materialUI) porque 
+Hay alguna que soluciona cosas que la otra no. Por ejemplo las card de MaterialUI
+estan diseñadas para que las imagenes no se distorsionen o no distorsionen el tamaño
+de las cards. 
+Las ventajas de usar bootstrap es que tengo un manejo mas facil de los estilos y de componentes simples como botones
+
+Por otro lado use Axios porque me lo recomendaron, ademas de que queria experimentar algo nuevo
+aunque entiendo que para este trajo es lo mismo que fetch.
+
+
+Me tome el trabajo de modificar la api del profe, cargando algunos productos que concuerdan con mi app
+funciona perfectamente. Hay que entrar en la carpeta de server y ejecutar:
+ * npm install
+ * instalar nodemon
+
+
+Con respecto a los componentes de la aplicacion, espero que haya podido aplicar los conociminentos que hasta ahora aprendimos.
+
+En la consola hay 2 advertencias relacionadas a UseEffect. Advierten que perdio la dependencia. Esta dependencia es el parametro 
+que paso en la ruta para acceder a id o category. Lo que entiendo es que es porque hasta que acceda a esa ruta no la encuentra.
+
+Hay un error/advertencia producido por el boton en dispositivos pequeños en el navbar
+este error no tiene solucion por mi parte ya que averigue y es un error que tienen en Bootstrap.
+Al parecer en proximas versiones lo solucionaran
