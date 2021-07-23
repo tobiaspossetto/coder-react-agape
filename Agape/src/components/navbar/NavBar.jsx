@@ -15,7 +15,7 @@ const NavBar = () => {
             <Container fluid>
                 <Nav.Link as={Link} to="/" className='mr-5'>
                     <Figure.Image
-                        width={171}
+                        width={150}
                         height='auto'
                         alt="logo"
                         src="https://i.imgur.com/C3zXSSv.png"

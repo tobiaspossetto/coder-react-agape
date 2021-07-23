@@ -8,7 +8,7 @@ require('../../styles.css')
 
 const ItemDetailContainer = () => {
     
-
+    
     //Trae el parametro id
     const { id } = useParams();
 

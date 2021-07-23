@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 
 import { Toast } from 'react-bootstrap';
 
+import {useCart} from '../../context/cart-context'
 
 //Propio de Material UI
 const useStyles = makeStyles({
@@ -29,7 +30,8 @@ const useStyles = makeStyles({
 
 const ItemDetail = ({ product }) => {
 
-
+  
+    
     const classes = useStyles();
 
     //state para el contador
@@ -38,6 +40,16 @@ const ItemDetail = ({ product }) => {
     const [show, setShow] = useState(false);
 
     const [add, setAdd] = useState(false);
+
+
+
+    const {addProduct, cartProducts} = useCart()
+
+    const addItem = () => {
+        addProduct(product,count)
+    }
+
+
     //Estas funciones suman o restan, rango 1-5
     const onAdd = () => {
         if (count < 5) {
@@ -85,7 +97,9 @@ const ItemDetail = ({ product }) => {
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {product.name}
+                                      
                                     </Typography>
+                                
                                     <Typography variant="body2" color="textSecondary" component="p">
                                         {product.description}
                                     </Typography>
@@ -93,7 +107,7 @@ const ItemDetail = ({ product }) => {
                             </CardActionArea>
                             <CardActions className='d-flex justify-content-between'>
                                 <ItemCount valor={count} sumar={onAdd} restar={onQuit} />
-                                <button className='shadow-lg btn btn-warning' onClick={addProd}>Agregar al carrito</button>
+                                <button className='shadow-lg btn btn-warning' onClick={addItem}>Agregar al carrito</button>
                             </CardActions>
                         </Card>
                         {add === false ? <div></div> :
