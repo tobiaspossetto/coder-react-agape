@@ -12,17 +12,32 @@ export  function CartProvider(props) {
 
 
     const addProduct = (newProduct, quantity) => {
-        setCartProducts([...cartProducts,{ newProduct, quantity}])
+        setCartProducts([...cartProducts,{ item: newProduct, quantity: quantity}])
         console.log('producto agregado')
-
-        setTimeout(() => {
-            console.log(cartProducts)
-        }, 5000);
+        console.log(cartProducts)
+        
       
     }
-    
+
+    const modifyProduct =  (id, quantity) => {
+
+        let modify = cartProducts
+       
+        modify.forEach(i => {
+            if(i.item.id=== id){
+                i.quantity = quantity;
+              
+            }
+           
+        });
+
+         setCartProducts(modify)
+        
+    }
 
     const removeProduct = (id) => {
+        let removeFinale = cartProducts.filter(i => i.item.id !== id)
+        setCartProducts(removeFinale)
 
     }
 
@@ -43,7 +58,9 @@ export  function CartProvider(props) {
     const value = React.useMemo(() => {
         return ({
             cartProducts,
-            addProduct
+            addProduct,
+            modifyProduct,
+            removeProduct
         })
     },[cartProducts])
 

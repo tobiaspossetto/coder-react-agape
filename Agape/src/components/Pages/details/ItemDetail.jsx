@@ -43,10 +43,11 @@ const ItemDetail = ({ product }) => {
 
 
 
-    const {addProduct, cartProducts} = useCart()
+    const {addProduct,cartProducts} = useCart()
 
     const addItem = () => {
         addProduct(product,count)
+        addProd()
     }
 
 
@@ -55,6 +56,7 @@ const ItemDetail = ({ product }) => {
         if (count < 5) {
             setCount(count + 1)
         }
+        
     }
     const onQuit = () => {
         if (count > 1) {
