@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import * as IoIcons from 'react-icons/io'
 import Input from './Input'
-
+import {useCart} from '../../context/cart-context'
 
 require('./carrito.css')
 const useStyles = makeStyles((theme) => ({
@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 const Formulario = () => {
+
+  const {total} = useCart()
+
     const classes = useStyles();
     //Creo un estado para cada uno de mis inputs, donde va el campo y un booleano para saber si es valido
     const [nombre, setNombre] = useState({campo:'', valido: null});
@@ -107,7 +110,7 @@ const Formulario = () => {
              <div className='container-precio d-flex align-items-center justify-content-center'>
       
                     <IoIcons.IoIosPricetags className='mr-2' color='ffa333' size={25}/>
-                    <span className='form-precio m-0'>Total: $5952</span>
+                    <span className='form-precio m-0'>{`total ${total}`}</span>
                         
             </div>  
 

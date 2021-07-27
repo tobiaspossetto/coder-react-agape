@@ -43,11 +43,13 @@ const ItemDetail = ({ product }) => {
 
 
 
-    const {addProduct,cartProducts} = useCart()
+    const {verifyReply} = useCart()
 
     const addItem = () => {
-        addProduct(product,count)
+        //addProduct(product,count)
+        verifyReply(product,count)
         addProd()
+        console.log(product.id)
     }
 
 

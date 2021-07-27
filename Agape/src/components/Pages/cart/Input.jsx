@@ -46,7 +46,7 @@ const Input = (props) => {
                          
             </input>
             
-            <span className={'leyenda-defecto '+ 'leyenda-'+props.valido}>{props.mensajeError}</span>
+            <span className={`leyenda-defecto  leyenda-${props.valido}`}>{props.mensajeError}</span>
         </div>
     )
 }

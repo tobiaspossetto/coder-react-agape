@@ -86,7 +86,7 @@ const useStyles = makeStyles({
 
 
 const Item = (props) => {
-  const {cartProducts,modifyProduct,removeProduct} = useCart()
+  const {modifyProduct,removeProduct} = useCart()
   const classes = useStyles();
 
   const [quantityEdit, setQuantityEdit] = useState(props.quantity);
@@ -110,8 +110,14 @@ const Item = (props) => {
       //  console.log(cartProducts)
   }
 
+
+  //No se por que este useEffect me da una advertencia
   useEffect(() => {
-    modifyProduct(props.id, quantityEdit)
+   
+      modifyProduct(props.id, quantityEdit)
+  
+   
+   
   }, [quantityEdit]);
 
   return (

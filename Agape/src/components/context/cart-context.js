@@ -9,16 +9,29 @@ export  function CartProvider(props) {
 
 
     const [cartProducts, setCartProducts] = useState([])
+    const [total, setTotal] = useState(0);
 
+   
+
+   
+
+    const finalPrice = () =>{
+        let total =0
+        cartProducts.forEach(i => {
+            total = total + i.item.price * i.quantity
+        });
+
+        setTotal(total)
+    }
 
     const addProduct = (newProduct, quantity) => {
         setCartProducts([...cartProducts,{ item: newProduct, quantity: quantity}])
-        console.log('producto agregado')
-        console.log(cartProducts)
+        finalPrice()
         
       
     }
 
+    //modificar porque ya existia
     const modifyProduct =  (id, quantity) => {
 
         let modify = cartProducts
@@ -30,15 +43,66 @@ export  function CartProvider(props) {
             }
            
         });
+        finalPrice()
+         setCartProducts(modify)
+        console.log(cartProducts)
+    }
 
+    //modificar desde el componente carrito
+    const addProductExistent =  (newProduct,cant) => {
+
+        let modify = cartProducts
+        
+
+        modify.forEach(i => {
+            if(i.item.id === newProduct.id){
+                i.quantity = i.quantity+cant;
+              
+            }
+           
+        });
+        finalPrice()
          setCartProducts(modify)
         
     }
-
+    const removeAll = () =>{
+        setCartProducts([])
+        finalPrice()
+    }
+    
     const removeProduct = (id) => {
         let removeFinale = cartProducts.filter(i => i.item.id !== id)
         setCartProducts(removeFinale)
+        finalPrice()
 
+    }
+
+    const verifyReply = (newProduct, quantity) => {
+      
+        
+       let coincidence = false
+
+       for (const i in cartProducts) {
+           //si hay coincidencia  en el id
+            if(cartProducts[i].item.id === newProduct.id){
+                
+                 coincidence = true
+          
+            }
+       }
+ 
+     
+        if(!coincidence){
+           //No hay repetidos entonces puedo agregarlo
+            addProduct(newProduct, quantity)
+        }else{
+            //ya existe, hay que modificar
+            addProductExistent(newProduct, quantity)
+            
+        }
+
+       
+        
     }
 
 
@@ -52,20 +116,17 @@ export  function CartProvider(props) {
 
 
 
-
-    //useMemo optimiza, guarda una referencia al objeto y retorna ese objeto sin volverlo a crear 
-    //a menos que la referencia cambie. Ayuda a que react no refresque al vicio 
-    const value = React.useMemo(() => {
-        return ({
-            cartProducts,
-            addProduct,
-            modifyProduct,
-            removeProduct
-        })
-    },[cartProducts])
-
+   
     //forma mas simple de pasarle los children
-    return <CartContext.Provider value={value} {...props} />
+    return <CartContext.Provider value={{
+        cartProducts,
+        addProduct,
+        modifyProduct,
+        removeProduct,
+        verifyReply,
+        removeAll,
+        total
+    }} {...props} />
 }
 
 
