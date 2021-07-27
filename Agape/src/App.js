@@ -13,14 +13,14 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
+import { HashRouter as Router } from 'react-router-dom'
 require("./App.css")
 function App() {
   return (
       <CartProvider>
 
 
-        <Router className="App">
+        <Router basename={process.env.PUBLIC_URL} className="App">
         <NavBar/>
           <Switch>
             <Route exact path={"/"} component={Home}/>
