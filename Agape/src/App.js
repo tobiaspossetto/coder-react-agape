@@ -9,7 +9,7 @@ import ItemListContainer from './components/Pages/products/ItemListContainer'
 import {CartProvider} from './components/context/cart-context'
 
 import {
-  BrowserRouter as Router,
+ 
   Switch,
   Route
 } from "react-router-dom";
