@@ -1,7 +1,7 @@
 import NavBar from './components/navbar/NavBar'
 import Footer from './components/footer/Footer'
 import Home from './components/Pages/home/Home'
-import CartContainer from './components/Pages/cart/CartContainer'
+import Cart from './components/Pages/cart/Cart'
 import ItemDetailContainer from './components/Pages/details/ItemDetailContainer'
 import ItemListContainer from './components/Pages/products/ItemListContainer'
 
@@ -27,7 +27,7 @@ function App() {
             <Route exact path={"/productos"} component={ItemListContainer}/> 
             <Route exact path={"/productos/category/:category"} component={ItemListContainer}/>
             <Route exact path={"/productos/item/:id"} component={ItemDetailContainer}/>
-            <Route exact path={"/carrito"} component={CartContainer}/>
+            <Route exact path={"/carrito"} component={Cart}/>
             
           </Switch>
 

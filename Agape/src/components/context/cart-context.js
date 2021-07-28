@@ -1,4 +1,4 @@
-import React,{ useState} from "react";
+import React,{ useState, useEffect} from "react";
 
 
 const CartContext = React.createContext();
@@ -10,11 +10,23 @@ export  function CartProvider(props) {
 
     const [cartProducts, setCartProducts] = useState([])
     const [total, setTotal] = useState(0);
-
+    const [totalItems, setTotalItems] = useState(0)
    
-
+    useEffect(() =>{
+        const totalItemsCart = () => {
+            let itemsTotal = 0
+           cartProducts.forEach(i => {
+               itemsTotal = itemsTotal + i.quantity
+           });
+     
+           setTotalItems(itemsTotal)
+     
+           
+        }
+        totalItemsCart()
+    },[cartProducts,total])
    
-
+  
     const finalPrice = () =>{
         let total =0
         cartProducts.forEach(i => {
@@ -27,7 +39,7 @@ export  function CartProvider(props) {
     const addProduct = (newProduct, quantity) => {
         setCartProducts([...cartProducts,{ item: newProduct, quantity: quantity}])
         finalPrice()
-        
+       
       
     }
 
@@ -44,6 +56,7 @@ export  function CartProvider(props) {
            
         });
         finalPrice()
+       
          setCartProducts(modify)
         console.log(cartProducts)
     }
@@ -62,19 +75,21 @@ export  function CartProvider(props) {
            
         });
         finalPrice()
+       
          setCartProducts(modify)
         
     }
     const removeAll = () =>{
         setCartProducts([])
         finalPrice()
+       
     }
     
     const removeProduct = (id) => {
         let removeFinale = cartProducts.filter(i => i.item.id !== id)
         setCartProducts(removeFinale)
-        finalPrice()
-
+         finalPrice()
+        
     }
 
     const verifyReply = (newProduct, quantity) => {
@@ -125,7 +140,8 @@ export  function CartProvider(props) {
         removeProduct,
         verifyReply,
         removeAll,
-        total
+        total,
+        totalItems
     }} {...props} />
 }
 

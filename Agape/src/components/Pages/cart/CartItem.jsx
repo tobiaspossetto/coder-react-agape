@@ -85,7 +85,7 @@ const useStyles = makeStyles({
 
 
 
-const Item = (props) => {
+const CartItem = (props) => {
   const {modifyProduct,removeProduct} = useCart()
   const classes = useStyles();
 
@@ -191,4 +191,4 @@ const Item = (props) => {
   )
 }
 
-export default Item
+export default CartItem

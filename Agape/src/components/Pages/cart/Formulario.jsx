@@ -4,6 +4,8 @@ import * as IoIcons from 'react-icons/io'
 import Input from './Input'
 import {useCart} from '../../context/cart-context'
 
+
+
 require('./carrito.css')
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 const Formulario = () => {
-
+  const {cartProducts} = useCart()
   const {total} = useCart()
 
     const classes = useStyles();
@@ -106,7 +108,7 @@ const Formulario = () => {
     }
 
     return (
-        <div className='container-form'>
+        <div className='container-form ' className={cartProducts.length === 0 ? 'formNone' : 'container-form '}>
              <div className='container-precio d-flex align-items-center justify-content-center'>
       
                     <IoIcons.IoIosPricetags className='mr-2' color='ffa333' size={25}/>

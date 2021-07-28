@@ -32,7 +32,7 @@ const NavBar = () => {
                     links.map((i,p ) =>{
                         return(
                             <Nav.Link key={p} className="mr-2" as={Link} to={i.to}>
-                               <LinkWidget icon={i.icon} name={i.name}/>
+                               <LinkWidget icon={i.icon} name={i.name} />
                             </Nav.Link>
                         
                         )
