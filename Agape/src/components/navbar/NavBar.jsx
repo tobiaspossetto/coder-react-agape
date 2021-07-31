@@ -3,8 +3,18 @@ import { Link } from 'react-router-dom';
 import links from './links'
 import LinkWidget from './LinkWidget'
 import { Container, Figure, Nav, Navbar } from 'react-bootstrap'
+import {useFirestore} from '../context/firestore-context'
 require('../styles.css')
 const NavBar = () => {
+    
+    const {isLogged,authGoogle,signOut} = useFirestore()
+    
+    const signIn = () => {
+        authGoogle()
+    }
+    const exit = () => {
+        signOut()
+    }
     return (
        
 
@@ -39,8 +49,10 @@ const NavBar = () => {
                     })
 
                 }
-                     
-
+                    
+                     {
+                         isLogged?<button onClick={exit} className="btn btn-danger">Salir</button>: <button onClick={signIn} className="btn btn-success">Ingresar</button>
+                     }
 
                     </Nav>
                   

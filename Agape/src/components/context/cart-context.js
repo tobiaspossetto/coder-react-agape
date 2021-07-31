@@ -1,11 +1,16 @@
 import React,{ useState, useEffect} from "react";
 
-import {getFirestore} from '../firebase'
+
+import {useFirestore} from './firestore-context'
 const CartContext = React.createContext();
 
 
 
 export  function CartProvider(props) {
+    const {getFirestore} = useFirestore()
+    //USER SECTION
+    
+    
 
     //DATA SECTION
 
@@ -13,9 +18,12 @@ export  function CartProvider(props) {
     const [categoryRopa, setCategoryRopa] = useState([]);
     const [categoryAccesorios, setCategoryAccesorios] = useState([]);
 
+
+
+
     const getProdFirestore = async () =>{
-        const firestore =  getFirestore()
-        const collection =   firestore.collection('items')
+        let firestore =  getFirestore()
+        let collection =   firestore.collection('items')
        // console.log(collection)
         const result =  await collection.get()
         let products = []
@@ -41,11 +49,11 @@ export  function CartProvider(props) {
         setCategoryAccesorios(result)
     }
     
-
+    
     useEffect(() =>{
         getProdFirestore()
        //console.log(allProducts)
-        
+     
     },[])
 
 
@@ -197,7 +205,9 @@ export  function CartProvider(props) {
         totalItems,
         allProducts,
         categoryRopa,
-        categoryAccesorios
+        categoryAccesorios,
+        
+        
     }} {...props} />
 }
 
