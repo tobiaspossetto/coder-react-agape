@@ -1,13 +1,66 @@
 import React,{ useState, useEffect} from "react";
 
-
+import {getFirestore} from '../firebase'
 const CartContext = React.createContext();
 
 
 
 export  function CartProvider(props) {
 
+    //DATA SECTION
 
+    const [allProducts, setAllProducts] = useState([]);
+    const [categoryRopa, setCategoryRopa] = useState([]);
+    const [categoryAccesorios, setCategoryAccesorios] = useState([]);
+
+    const getProdFirestore = async () =>{
+        const firestore =  getFirestore()
+        const collection =   firestore.collection('items')
+       // console.log(collection)
+        const result =  await collection.get()
+        let products = []
+        result.forEach((item) =>{
+            //Por alguna razon .data() no me trae el id asi que lo agregue yo mismo
+            let document = {...item.data(),id:item.id}
+            products.push(document)
+         
+           
+        })
+       
+       setAllProducts(products)
+    }
+
+    
+    const getCategoryRopa = () =>{
+        let result = allProducts.filter( i => i.category === 'Ropa')
+        setCategoryRopa(result)
+    }
+
+    const getCategoryAccesorios = () =>{
+        let result = allProducts.filter( i => i.category === 'Accesorios')
+        setCategoryAccesorios(result)
+    }
+    
+
+    useEffect(() =>{
+        getProdFirestore()
+       //console.log(allProducts)
+        
+    },[])
+
+
+    useEffect(() =>{
+        getCategoryRopa()
+        getCategoryAccesorios()
+    },[allProducts])
+
+
+
+
+
+
+
+    //CART SECTION
     const [cartProducts, setCartProducts] = useState([])
     const [total, setTotal] = useState(0);
     const [totalItems, setTotalItems] = useState(0)
@@ -141,7 +194,10 @@ export  function CartProvider(props) {
         verifyReply,
         removeAll,
         total,
-        totalItems
+        totalItems,
+        allProducts,
+        categoryRopa,
+        categoryAccesorios
     }} {...props} />
 }
 

@@ -43,7 +43,7 @@ const Formulario = () => {
 
     //Las expresiones regulares que voy a usar para validar. Sacadas de internet 
     const expresiones = {
-      usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+      usuario: /^[a-zA-Z0-9]{4,16}$/, // Letras, numeros, guion y guion_bajo
       nombre: /^[a-zA-ZÀ-ÿ\s]{4,40}$/, // Letras y espacios, pueden llevar acentos.
       password: /^.{4,12}$/, // 4 a 12 digitos.
       correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -108,7 +108,7 @@ const Formulario = () => {
     }
 
     return (
-        <div className='container-form ' className={cartProducts.length === 0 ? 'formNone' : 'container-form '}>
+        <div  className={cartProducts.length === 0 ? 'formNone' : 'container-form '}>
              <div className='container-precio d-flex align-items-center justify-content-center'>
       
                     <IoIcons.IoIosPricetags className='mr-2' color='ffa333' size={25}/>
