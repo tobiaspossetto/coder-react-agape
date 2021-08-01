@@ -5,7 +5,11 @@ import 'firebase/firestore'
 import 'firebase/auth';
 
 
-const FirestoreContext = React.createContext();
+
+
+
+const FirebaseContext = React.createContext();
+
 const firebaseConfig = {
     apiKey: "AIzaSyCs57LkTJ17PhrkEo5XPVY4b71sKw2-0BU",
     authDomain: "agapeapp-7f28c.firebaseapp.com",
@@ -20,9 +24,9 @@ const  provider = new firebase.auth.GoogleAuthProvider();
 
 
 
-export  function FirestoreProvider(props) {
+export  function FirebaseProvider(props) {
   const [isLogged, setIsLogged] = useState(false);
-    
+  const [user, setUser] = useState({})
        
    useEffect(() =>{
         auth.onAuthStateChanged(user =>{
@@ -30,8 +34,15 @@ export  function FirestoreProvider(props) {
                 setIsLogged(true)
                 console.log("ENTRO")
                 console.log(user.displayName)
+                user.getIdToken(true)
+                    .then((token) =>
+                         console.log(token)
+                    )
+                    .catch((error) => console.log(error))
+              
             }else{
                 setIsLogged(false)
+               
                console.log("SALIO")
             }
         })
@@ -46,7 +57,10 @@ const authGoogle = () => {
     console.log('no esta logead')
    auth.signInWithPopup(provider)
     .then(response => {
-       
+       if(response.credential){
+          
+         
+       }
         
       
     })
@@ -60,16 +74,17 @@ const authGoogle = () => {
 }
 const signOut = () => {
     auth.signOut().then(()=>{
-        
+       
         
     })
+   
 }
 const getFirestore = () => {
     //retorna el acceso al servicio firestore
     return firebase.firestore(app)
 }
 
-    return <FirestoreContext.Provider value={{
+    return <FirebaseContext.Provider value={{
         authGoogle,
         getFirestore,
         isLogged,
@@ -79,8 +94,8 @@ const getFirestore = () => {
 
 
 
-export  function useFirestore() {
-    const context = React.useContext(FirestoreContext)
+export  function useFirebase() {
+    const context = React.useContext(FirebaseContext)
 
     //asegurarme de que no lo estoy llamando en un componente que no es hijo
     //solo es una verificacion

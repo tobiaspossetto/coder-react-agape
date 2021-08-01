@@ -7,7 +7,7 @@ import ItemListContainer from './components/Pages/products/ItemListContainer'
 
 
 import {CartProvider} from './components/context/cart-context'
-import {FirestoreProvider} from './components/context/firestore-context'
+import {FirebaseProvider} from './components/context/firebase-context'
 import {
  
   Switch,
@@ -17,7 +17,7 @@ import { HashRouter as Router } from 'react-router-dom'
 require("./App.css")
 function App() {
   return (
-    <FirestoreProvider>
+    <FirebaseProvider>
       <CartProvider>
 
 
@@ -37,7 +37,7 @@ function App() {
           <Footer/>
         </Router>
       </CartProvider>
-      </FirestoreProvider>
+      </FirebaseProvider>
      
     
   );

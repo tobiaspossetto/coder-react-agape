@@ -19,26 +19,33 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
 
-        const getById =  () => {
+        const getById =   () => {
             //hace la llamada pasando id
            
-            let prodDetail = allProducts.filter(product => product.id === id)
+            let prodDetail =  allProducts.filter(product => product.id === id)
             //Limpio el state  para que solo tenga un producto en detalle
-             setProd([])
+          setProd([])
              //Por alguna razon no me seteaba el state
             //Lo resolvi con el spread ...
-             setProd(...prodDetail)
-           
+            setProd(...prodDetail)
+         
             
-           
         }
 
 
        //Siguiendo al parametro se ejecuta
-       getById()
-    },[id]);
-
-
+      getById()
+      
+       
+      
+     
+        
+      
+        
+       
+    });
+   
+   
     return (
         <div className='pages'>
             {/* Paso el state  */}

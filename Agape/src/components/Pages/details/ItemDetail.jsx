@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import ItemCount from './ItemCount'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -49,7 +49,7 @@ const ItemDetail = ({ product }) => {
         //addProduct(product,count)
         verifyReply(product,count)
         addProd()
-        console.log(product.id)
+      
     }
 
 
@@ -95,7 +95,7 @@ const ItemDetail = ({ product }) => {
                                     component="img"
                                     alt="Contemplative Reptile"
                                     height="350"
-                                    image={product.img}
+                                      image={product.img}
                                     title="Contemplative Reptile"
                                 />
                                 <CardContent>
