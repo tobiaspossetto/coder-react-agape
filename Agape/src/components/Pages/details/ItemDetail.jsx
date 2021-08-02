@@ -107,6 +107,9 @@ const ItemDetail = ({ product }) => {
                                     <Typography variant="body2" color="textSecondary" component="p">
                                         {product.description}
                                     </Typography>
+                                    <Typography variant="h6" color="textPrimary" component="p">
+                                        ${product.price}
+                                    </Typography>
                                 </CardContent>
                             </CardActionArea>
                             <CardActions className='d-flex justify-content-between'>

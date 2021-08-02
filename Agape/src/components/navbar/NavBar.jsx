@@ -49,8 +49,9 @@ const NavBar = () => {
                     })
 
                 }
-                    
+                   
                      {
+                         
                          isLogged?<button onClick={exit} className="btn btn-danger">Salir</button>: <button onClick={signIn} className="btn btn-success">Ingresar</button>
                      }
 

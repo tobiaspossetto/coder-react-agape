@@ -13,8 +13,8 @@ const Cart = () => {
     
   
     return (
-        <div className='pages'>
-            <div className='container-titulo d-flex align-items-center justify-content-center mt-3'>
+        <div className='pages container'>
+            <div className=' container-titulo d-flex align-items-center justify-content-center mt-3'>
       
               <span className='titulo mb-0 '>Carrito de compras</span>
               <FaIcons.FaShoppingBag  size={30}/>

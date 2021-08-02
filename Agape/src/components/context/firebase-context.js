@@ -26,27 +26,39 @@ const  provider = new firebase.auth.GoogleAuthProvider();
 
 export  function FirebaseProvider(props) {
   const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState({})
+ 
+  const [user, setUser] = useState({
+      name:null,
+      email:null,
+      tokenId: null
+  })
        
-   useEffect(() =>{
-        auth.onAuthStateChanged(user =>{
-            if(user){
-                setIsLogged(true)
-                console.log("ENTRO")
-                console.log(user.displayName)
-                user.getIdToken(true)
-                    .then((token) =>
-                         console.log(token)
-                    )
-                    .catch((error) => console.log(error))
-              
-            }else{
-                setIsLogged(false)
-               
-               console.log("SALIO")
-            }
-        })
-   })
+  useEffect(() =>{
+    auth.onAuthStateChanged(user =>{
+        if(user){
+           
+            setIsLogged(true)
+            console.log("ENTRO")
+           
+            user.getIdToken(true)
+                .then((token) =>
+                   
+                      setUser({name: user.displayName, email: user.email, tokenId: token})
+                     
+                )
+                .catch((error) => console.log(error))
+
+          
+          
+        }else{
+            setIsLogged(false)
+            setUser({name: null, email: null, tokenId: null})
+           console.log("SALIO")
+        }
+    })
+  },[])
+      
+  
   
     
 
@@ -88,7 +100,9 @@ const getFirestore = () => {
         authGoogle,
         getFirestore,
         isLogged,
-        signOut
+        signOut,
+        user
+        
     }} {...props} />
 }
 

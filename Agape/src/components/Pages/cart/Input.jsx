@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 const Input = (props) => {
 
@@ -8,7 +8,13 @@ const Input = (props) => {
        props.setEstado({...props.estado, campo: e.target.value})
     }
 
-    //Ingresa a las validacones cada vez que se teclea dentro o se ingresa a el
+
+    //Este  useEffect prueba que no se renderiza  sin necesidad
+    // useEffect(() => {
+    //     console.log('montado')
+    // },[])
+
+    //Ingresa a las validaciones cada vez que se teclea dentro o se ingresa a el
     const validaciones = () => {
         //Si el input tiene asignada una expresionRegular
         if(props.expresionRegular){
@@ -18,15 +24,12 @@ const Input = (props) => {
                 //el contenido del estado valido es un string porque lo asigno a los estilos en css
                 props.setEstado({...props.estado, valido: 'correcto'})
             }else{
-                console.log('input incorrecto')
+              
                 props.setEstado({...props.estado, valido: 'incorrecto'})
             }
         }
 
-        //Funcion dedicada al input de correo2, activa la funcion de validacion que esta en el componente Formulario.jsx
-        if(props.funcion){
-            props.funcion()
-        }
+       
         
     }
 
