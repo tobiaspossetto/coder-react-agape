@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/coder-react-agape/static/css/main.071f8f1c.chunk.css",
-    "main.js": "/coder-react-agape/static/js/main.82a38b38.chunk.js",
-    "main.js.map": "/coder-react-agape/static/js/main.82a38b38.chunk.js.map",
+    "main.js": "/coder-react-agape/static/js/main.947af70f.chunk.js",
+    "main.js.map": "/coder-react-agape/static/js/main.947af70f.chunk.js.map",
     "runtime-main.js": "/coder-react-agape/static/js/runtime-main.542cd887.js",
     "runtime-main.js.map": "/coder-react-agape/static/js/runtime-main.542cd887.js.map",
-    "static/js/2.20698f11.chunk.js": "/coder-react-agape/static/js/2.20698f11.chunk.js",
-    "static/js/2.20698f11.chunk.js.map": "/coder-react-agape/static/js/2.20698f11.chunk.js.map",
+    "static/js/2.4dbe5cd0.chunk.js": "/coder-react-agape/static/js/2.4dbe5cd0.chunk.js",
+    "static/js/2.4dbe5cd0.chunk.js.map": "/coder-react-agape/static/js/2.4dbe5cd0.chunk.js.map",
     "index.html": "/coder-react-agape/index.html",
     "static/css/main.071f8f1c.chunk.css.map": "/coder-react-agape/static/css/main.071f8f1c.chunk.css.map",
-    "static/js/2.20698f11.chunk.js.LICENSE.txt": "/coder-react-agape/static/js/2.20698f11.chunk.js.LICENSE.txt"
+    "static/js/2.4dbe5cd0.chunk.js.LICENSE.txt": "/coder-react-agape/static/js/2.4dbe5cd0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.542cd887.js",
-    "static/js/2.20698f11.chunk.js",
+    "static/js/2.4dbe5cd0.chunk.js",
     "static/css/main.071f8f1c.chunk.css",
-    "static/js/main.82a38b38.chunk.js"
+    "static/js/main.947af70f.chunk.js"
   ]
 }
