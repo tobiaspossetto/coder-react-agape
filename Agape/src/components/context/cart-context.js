@@ -10,8 +10,7 @@ export  function CartProvider(props) {
     //DATA SECTION
 
     const [allProducts, setAllProducts] = useState([]);
-    const [categoryRopa, setCategoryRopa] = useState([]);
-    const [categoryAccesorios, setCategoryAccesorios] = useState([]);
+   
 
     const getProdFirestore = async () =>{
         const firestore =  getFirestore()
@@ -31,15 +30,7 @@ export  function CartProvider(props) {
     }
 
     
-    const getCategoryRopa = () =>{
-        let result = allProducts.filter( i => i.category === 'Ropa')
-        setCategoryRopa(result)
-    }
-
-    const getCategoryAccesorios = () =>{
-        let result = allProducts.filter( i => i.category === 'Accesorios')
-        setCategoryAccesorios(result)
-    }
+   
     
 
     useEffect(() =>{
@@ -49,11 +40,7 @@ export  function CartProvider(props) {
     },[])
 
 
-    useEffect(() =>{
-        getCategoryRopa()
-        getCategoryAccesorios()
-    },[allProducts])
-
+ 
 
 
 
@@ -195,9 +182,7 @@ export  function CartProvider(props) {
         removeAll,
         total,
         totalItems,
-        allProducts,
-        categoryRopa,
-        categoryAccesorios
+        allProducts
     }} {...props} />
 }
 

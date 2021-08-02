@@ -10,29 +10,25 @@ const ItemListContainer = () => {
     //estado donde guardo los productos
     const [products, setProducts] = useState([]);
    
-    const {allProducts,categoryRopa,categoryAccesorios} = useCart()
-    const getProducts =  () =>{
-        //Si llega un parametro de category entonces
-        if(category){
-           
-            if(category === 'Ropa'){
-                setProducts(categoryRopa)
-            }else{
-                setProducts(categoryAccesorios)
-            }
-
-        }else{
-            
-            setProducts(allProducts)
-          
-        }
-    }
+    const {allProducts} = useCart()
+    
    
     useEffect(()=>{ 
-        
+        const getProducts =  () =>{
+            //Si llega un parametro de category entonces
+            if(category){
+               
+              let prodByCat = allProducts.filter(product => product.category === category)
+              setProducts(prodByCat)
+            }else{
+                
+                setProducts(allProducts)
+              
+            }
+        }
         getProducts()
        
-    })
+    },[category])
     //ESTE COMPONENTE PARA MI ESTA AL VICIO, PERO ES PARA CUMPLIR CON LA CONSIGNA
     return (
         <div className="pages">
