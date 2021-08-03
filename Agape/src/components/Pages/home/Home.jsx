@@ -11,7 +11,7 @@ const Home = () => {
             <Portada/>
            
 
-            <div className="contacto">
+            <div className="contacto mt-5 mb-5">
                 <h2>Podes contactarte con nosotros en:</h2>
                 <div className="">
                     <a rel="noreferrer" target="_blank" href='https://www.instagram.com/agapetiendaonline/?hl=es'><RiIcons.RiInstagramFill  className="logo-social inst"/></a>

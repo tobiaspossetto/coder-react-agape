@@ -16,25 +16,25 @@ export  function CartProvider(props) {
     //DATA SECTION
 
     const [allProducts, setAllProducts] = useState([]);
-    const [pedido, setpedido] = useState(false)
+    const [pedido, setpedido] = useState({})
     const {user} = useFirebase()
     const newPedido = (datosForm) =>{
        // setpedido({})
-        let newPedido =[ {
+        let newPedido = {
             cliente:{
                 nombre: user.name,
                 email: user.email,
-                direccion: datosForm.Clidireccion,
-                telefono: datosForm.Clitelefono,
+                direccion: datosForm.direccion,
+                telefono: datosForm.telefono,
             },
             itemsPedido:{
                 ...cartProducts,
                 totalPedido : 5000
             }
-        }]
-        setpedido(true)
+        }
+        setpedido(newPedido)
         setCartProducts([])
-
+        console.log(pedido)
     }
     
 

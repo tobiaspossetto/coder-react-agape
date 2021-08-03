@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useCart} from '../../context/cart-context'
 import ItemList from './ItemList'
 import { useParams } from 'react-router-dom';
-require('../../styles.css')
+import('../../styles.css')
 const ItemListContainer = () => {
     //traigo category
     const { category } = useParams();
@@ -30,7 +30,7 @@ const ItemListContainer = () => {
         }
         getProducts()
        
-    },[category])
+    },[category,allProducts])
 
 
 

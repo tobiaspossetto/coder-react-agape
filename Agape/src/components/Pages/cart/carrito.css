@@ -1,10 +1,12 @@
 .container-titulo{
     text-align:center;
-    margin: auto;
+    border-radius: 5px;
     margin-bottom: 35px;
+    padding: 5px;
+    background: #dc3545;
 }
 .titulo{
-    color: #2b2a2a;
+    color: #ffffff;
     font-size:30px;
     text-align:center;
     

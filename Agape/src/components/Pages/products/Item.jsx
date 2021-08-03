@@ -15,7 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 import Typography from '@material-ui/core/Typography';
 
-require('../../styles.css')
+import('../../styles.css')
 
 
 

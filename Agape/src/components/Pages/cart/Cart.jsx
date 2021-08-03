@@ -13,11 +13,11 @@ const Cart = () => {
     
   
     return (
-        <div className='pages container'>
-            <div className=' container-titulo d-flex align-items-center justify-content-center mt-3'>
+        <div className='pages container pt-3'>
+            <div className=' container-titulo d-flex align-items-center justify-content-center '>
       
               <span className='titulo mb-0 '>Carrito de compras</span>
-              <FaIcons.FaShoppingBag  size={30}/>
+              <FaIcons.FaShoppingBag color='white' size={30}/>
                                 
             </div>
             <div className='container-items'>
