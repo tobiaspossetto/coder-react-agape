@@ -1,36 +1,45 @@
 import React,{ useState, useEffect} from "react";
 
+ 
+
 import Axios from "axios"
 import {useFirebase} from './firebase-context'
+import { useLocation } from 'react-router-dom';
 const CartContext = React.createContext();
 
 
 
-
 export  function CartProvider(props) {
-    
+  
     //USER SECTION
     
-    
+   
+const { pathname } = useLocation();
+   useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
 
     //DATA SECTION
 
     const [allProducts, setAllProducts] = useState([]);
     const [pedido, setpedido] = useState({})
-    const {user} = useFirebase()
+    const {user,createTimestamp} = useFirebase()
     const newPedido = (datosForm) =>{
        // setpedido({})
         let newPedido = {
-            cliente:{
+            buyer:{
                 nombre: user.name,
                 email: user.email,
                 direccion: datosForm.direccion,
                 telefono: datosForm.telefono,
             },
-            itemsPedido:{
+            items:{
                 ...cartProducts,
-                totalPedido : 5000
-            }
+              
+            },
+            date: createTimestamp(),
+            totalPedido : total
+
         }
         setpedido(newPedido)
         setCartProducts([])

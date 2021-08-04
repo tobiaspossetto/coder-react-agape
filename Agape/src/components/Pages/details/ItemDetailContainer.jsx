@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory  } from 'react-router-dom';
 import ItemDetail from './ItemDetail'
 import {useCart} from '../../context/cart-context'
 
@@ -9,6 +9,8 @@ require('../../styles.css')
 const ItemDetailContainer = () => {
     
     const {allProducts} = useCart()
+    let history = useHistory();
+
     
     //Trae el parametro id
     const { id } = useParams();
@@ -23,11 +25,17 @@ const ItemDetailContainer = () => {
             //hace la llamada pasando id
            
             let prodDetail =  allProducts.filter(product => product.id === id)
-            //Limpio el state  para que solo tenga un producto en detalle
-          setProd([])
-             //Por alguna razon no me seteaba el state
+            if(prodDetail.length === 0) {
+                
+                history.push("/productos");
+            }else{
+                    //Limpio el state  para que solo tenga un producto en detalle
+            setProd([])
+            //Por alguna razon no me seteaba el state
             //Lo resolvi con el spread ...
             setProd(...prodDetail)
+            }
+          
          
             
         }

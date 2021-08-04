@@ -32,6 +32,15 @@ export  function FirebaseProvider(props) {
       email:null,
       tokenId: null
   })
+
+
+  const createTimestamp  = () =>{
+        return firebase.firestore.Timestamp.fromDate(new Date())
+  }
+
+
+
+  
        
   useEffect(() =>{
     auth.onAuthStateChanged(user =>{
@@ -86,7 +95,7 @@ const authGoogle = () => {
 }
 const signOut = () => {
     auth.signOut().then(()=>{
-       
+      
         
     })
    
@@ -101,7 +110,8 @@ const getFirestore = () => {
         getFirestore,
         isLogged,
         signOut,
-        user
+        user,
+        createTimestamp
         
     }} {...props} />
 }

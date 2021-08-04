@@ -14,29 +14,39 @@ import {
   Route
 } from "react-router-dom";
 import { HashRouter as Router } from 'react-router-dom'
+
 require("./App.css")
 function App() {
+
+  
   return (
     <FirebaseProvider>
-      <CartProvider>
+      
 
 
         <Router basename={process.env.PUBLIC_URL} className="App">
-        <NavBar/>
+        
+          <CartProvider>
+            <NavBar/>
+          </CartProvider>
+          
           <Switch>
-            <Route exact path={"/"} component={Home}/>
-            <Route exact path={"/productos"} component={ItemListContainer}/> 
-            <Route exact path={"/productos/category/:category"} component={ItemListContainer}/>
-            <Route exact path={"/productos/item/:id"} component={ItemDetailContainer}/>
-            <Route exact path={"/carrito"} component={Cart}/>
-            <Route path={"*"} component={Home}/>
+              <Route exact path={"/"} component={Home}/>
+            <CartProvider>
+              <Route exact path={"/productos"} component={ItemListContainer}/> 
+              <Route exact path={"/productos/category/:category"} component={ItemListContainer}/>
+              <Route exact path={"/productos/item/:id"} component={ItemDetailContainer}/>
+              <Route exact path={"/carrito"} component={Cart}/>
+            </CartProvider>
+              <Route path={"*"} component={Home}/>
+           
           </Switch>
 
-
+          
 
           <Footer/>
         </Router>
-      </CartProvider>
+     
       </FirebaseProvider>
      
     
