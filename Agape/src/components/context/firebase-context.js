@@ -30,13 +30,14 @@ export  function FirebaseProvider(props) {
   const [user, setUser] = useState({
       name:null,
       email:null,
-      tokenId: null
+      tokenId: null,
+      uid: null
   })
 
 
-  const createTimestamp  = () =>{
-        return firebase.firestore.Timestamp.fromDate(new Date())
-  }
+//   const createTimestamp  = () =>{
+//         return firebase.firestore.Timestamp.fromDate(new Date())
+//   }
 
 
 
@@ -52,7 +53,7 @@ export  function FirebaseProvider(props) {
             user.getIdToken(true)
                 .then((token) =>
                    
-                      setUser({name: user.displayName, email: user.email, tokenId: token})
+                      setUser({name: user.displayName, email: user.email, tokenId: token, uid: user.uid})
                      
                 )
                 .catch((error) => console.log(error))
@@ -110,8 +111,7 @@ const getFirestore = () => {
         getFirestore,
         isLogged,
         signOut,
-        user,
-        createTimestamp
+        user
         
     }} {...props} />
 }

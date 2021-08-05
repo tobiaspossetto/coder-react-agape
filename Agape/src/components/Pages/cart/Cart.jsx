@@ -4,9 +4,12 @@ import Formulario from './Formulario'
 import * as FaIcons from 'react-icons/fa'
 
 import CartList from './CartList'
-require('./carrito.css')
-const Cart = () => {
 
+// import { useCart } from '../../context/cart-context'
+
+import('./carrito.css')
+const Cart = () => {
+    // const { pedido} = useCart()
     
    
 

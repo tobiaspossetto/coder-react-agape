@@ -5,6 +5,7 @@ import React,{ useState, useEffect} from "react";
 import Axios from "axios"
 import {useFirebase} from './firebase-context'
 import { useLocation } from 'react-router-dom';
+import axios from "axios";
 const CartContext = React.createContext();
 
 
@@ -23,27 +24,37 @@ const { pathname } = useLocation();
 
     const [allProducts, setAllProducts] = useState([]);
     const [pedido, setpedido] = useState({})
-    const {user,createTimestamp} = useFirebase()
+    const {user} = useFirebase()
     const newPedido = (datosForm) =>{
+        let fecha = new Date()
+        let month = fecha.getMonth() + 1;
+        let day = fecha.getUTCDate();
+        let year = fecha.getUTCFullYear();
+
+        let fechaFinal = `${day}/${month}/${year}`
        // setpedido({})
-        let newPedido = {
+        let newOrder = {
             buyer:{
                 nombre: user.name,
                 email: user.email,
                 direccion: datosForm.direccion,
                 telefono: datosForm.telefono,
             },
-            items:{
+            items:[
                 ...cartProducts,
               
-            },
-            date: createTimestamp(),
-            totalPedido : total
+            ],
+            date: fechaFinal,
+            totalPrice : total
 
         }
-        setpedido(newPedido)
+        setpedido(newOrder)
         setCartProducts([])
-        console.log(pedido)
+        axios.post(`https://agapeapp-7f28c-default-rtdb.firebaseio.com/orders/${user.uid}.json?auth=${user.tokenId}`,pedido)
+         .then(response =>
+         
+            setpedido(response.data.name))
+        .catch((error) => console.log(error))
     }
     
 
@@ -125,7 +136,7 @@ const { pathname } = useLocation();
     const addProduct = (newProduct, quantity) => {
         setCartProducts([...cartProducts,{ item: newProduct, quantity: quantity}])
         finalPrice()
-       
+        
       
     }
 
@@ -230,6 +241,7 @@ const { pathname } = useLocation();
         totalItems,
         allProducts,
         newPedido
+        
        
         
         

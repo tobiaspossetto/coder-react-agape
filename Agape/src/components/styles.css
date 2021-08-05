@@ -5,19 +5,6 @@
     background-color: #f4f4f2;
 }
 
-.navbar{
-    background: rgb(46, 46, 46);
-    min-height: 90px;
- 
-}
-.navbar-toggle{
-    background:#ffac40;
-}
-.navbar span{
-    color: white;
-    font-weight: 400;
-    font-size: 18px;
-}
 
 
 /* Home */

@@ -5,7 +5,7 @@ import LinkWidget from './LinkWidget'
 import { Container, Figure, Nav, Navbar } from 'react-bootstrap'
 import {useFirebase} from '../context/firebase-context'
 import * as FcIcons from 'react-icons/fc'
-require('../styles.css')
+import('./nav.css')
 const NavBar = () => {
     
     const {isLogged,authGoogle,signOut} = useFirebase()
@@ -53,7 +53,7 @@ const NavBar = () => {
                    
                      {
                          
-                         isLogged?<button onClick={exit} className="btn btn-danger">Salir</button>: <button onClick={signIn} className="btn btn-light d-flex align-items-center justify-content-center"><FcIcons.FcGoogle size={25}/><span className='text-dark  ml-2 '>Ingresa</span></button>
+                         isLogged?<button onClick={exit} className="btn btn-danger">Salir de la cuenta</button>: <button onClick={signIn} className="btn btn-light d-flex align-items-center justify-content-center"><FcIcons.FcGoogle size={25}/><span className='text-dark  ml-2 '>Ingresar</span></button>
                      }
 
                     </Nav>
