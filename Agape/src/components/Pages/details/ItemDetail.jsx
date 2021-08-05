@@ -108,7 +108,7 @@ const ItemDetail = ({ product }) => {
                                         {product.description}
                                     </Typography>
                                     <Typography variant="h6" color="textPrimary" component="p">
-                                        ${product.price}
+                                        Precio: ${product.price}  -  Stock:{product.stock}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

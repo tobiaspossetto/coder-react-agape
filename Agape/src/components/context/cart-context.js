@@ -79,10 +79,10 @@ const { pathname } = useLocation();
          let productoFinal = []
         for (let i = 0; i < productosArray.length; i++) {
             
-            productoFinal.push({id:claves[i], name:productosArray[i].name, description: productosArray[i].description, price:productosArray[i].price, img: productosArray[i].img, category:productosArray[i].category})
+            productoFinal.push({id:claves[i], name:productosArray[i].name, description: productosArray[i].description, price:productosArray[i].price, img: productosArray[i].img, category:productosArray[i].category, stock:productosArray[i].stock})
             
         }
-     
+       
        setAllProducts(productoFinal)
     }
 
