@@ -110,7 +110,7 @@ const { pathname } = useLocation();
     const [totalItems, setTotalItems] = useState(0)
    
     useEffect(() =>{
-        const totalItemsCart = () => {
+      
             let itemsTotal = 0
            cartProducts.forEach(i => {
                itemsTotal = itemsTotal + i.quantity
@@ -119,8 +119,7 @@ const { pathname } = useLocation();
            setTotalItems(itemsTotal)
      
            
-        }
-        totalItemsCart()
+      
     },[cartProducts,total])
    
   
@@ -132,10 +131,18 @@ const { pathname } = useLocation();
 
         setTotal(total)
     }
-
+    useEffect(() => {
+        let total =0
+        cartProducts.forEach(i => {
+            total = total + i.item.price * i.quantity
+        });
+        
+        setTotal(total)
+    
+    },[cartProducts])
     const addProduct = (newProduct, quantity) => {
         setCartProducts([...cartProducts,{ item: newProduct, quantity: quantity}])
-        finalPrice()
+        //finalPrice()
         
       
     }
@@ -152,10 +159,10 @@ const { pathname } = useLocation();
             }
            
         });
-        finalPrice()
+       finalPrice()
        
          setCartProducts(modify)
-        console.log(cartProducts)
+       
     }
 
     //modificar desde el componente carrito
@@ -166,26 +173,26 @@ const { pathname } = useLocation();
 
         modify.forEach(i => {
             if(i.item.id === newProduct.id){
-                i.quantity = i.quantity+cant;
+                i.quantity = cant;
               
             }
            
         });
-        finalPrice()
+       // finalPrice()
        
          setCartProducts(modify)
         
     }
     const removeAll = () =>{
         setCartProducts([])
-        finalPrice()
+       // finalPrice()
        
     }
     
     const removeProduct = (id) => {
         let removeFinale = cartProducts.filter(i => i.item.id !== id)
         setCartProducts(removeFinale)
-         finalPrice()
+         //finalPrice()
         
     }
 
@@ -225,9 +232,6 @@ const { pathname } = useLocation();
 
 
 
-
-
-
    
     //forma mas simple de pasarle los children
     return <CartContext.Provider value={{
@@ -240,8 +244,8 @@ const { pathname } = useLocation();
         total,
         totalItems,
         allProducts,
-        newPedido
-        
+        newPedido,
+       
        
         
         

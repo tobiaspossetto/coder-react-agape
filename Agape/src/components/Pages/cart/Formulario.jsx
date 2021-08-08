@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
 const Formulario = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { } = useCart()
-  const { total, cartProducts, newPedido } = useCart()
+  
+  const { total, cartProducts, newPedido, verificar } = useCart()
   const classes = useStyles();
   const { isLogged, authGoogle, user } = useFirebase()
 
@@ -98,7 +98,7 @@ const Formulario = () => {
           :
 
           <button type="submit" className="btn btn-danger">Enviar</button>}
-
+       
 
       </form>
     </div>

@@ -4,12 +4,10 @@ import Home from './components/Pages/home/Home'
 import Cart from './components/Pages/cart/Cart'
 import ItemDetailContainer from './components/Pages/details/ItemDetailContainer'
 import ItemListContainer from './components/Pages/products/ItemListContainer'
-
-
-import {CartProvider} from './components/context/cart-context'
-import {FirebaseProvider} from './components/context/firebase-context'
+import { CartProvider } from './components/context/cart-context'
+import { FirebaseProvider } from './components/context/firebase-context'
 import {
- 
+
   Switch,
   Route
 } from "react-router-dom";
@@ -18,38 +16,40 @@ import { HashRouter as Router } from 'react-router-dom'
 require("./App.css")
 function App() {
 
-  
+
   return (
     <FirebaseProvider>
-      
 
 
-        <Router basename={process.env.PUBLIC_URL} className="App">
-        
-          <CartProvider>
-            <NavBar/>
-          </CartProvider>
-          
+
+      <Router basename={process.env.PUBLIC_URL} className="App">
+        <CartProvider>
+
+          <NavBar />
+
+
           <Switch>
-              <Route exact path={"/"} component={Home}/>
-            <CartProvider>
-              <Route exact path={"/productos"} component={ItemListContainer}/> 
-              <Route exact path={"/productos/category/:category"} component={ItemListContainer}/>
-              <Route exact path={"/productos/item/:id"} component={ItemDetailContainer}/>
-              <Route exact path={"/carrito"} component={Cart}/>
-            </CartProvider>
-              <Route path={"*"} component={Home}/>
-           
+            <Route exact path={"/"} component={Home} />
+
+            <Route exact path={"/productos"} component={ItemListContainer} />
+            <Route exact path={"/productos/category/:category"} component={ItemListContainer} />
+            <Route exact path={"/productos/item/:id"} component={ItemDetailContainer} />
+            <Route exact path={"/carrito"} component={Cart} />
+
+            <Route path={"*"} component={Home} />
+
           </Switch>
 
-          
 
-          <Footer/>
-        </Router>
-     
-      </FirebaseProvider>
-     
-    
+
+          <Footer />
+
+        </CartProvider>
+      </Router>
+
+    </FirebaseProvider>
+
+
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import ItemCount from './ItemCount'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -29,8 +29,8 @@ const useStyles = makeStyles({
 
 
 const ItemDetail = ({ product }) => {
-
   
+    
     
     const classes = useStyles();
 
@@ -45,6 +45,8 @@ const ItemDetail = ({ product }) => {
 
     const {verifyReply} = useCart()
 
+   
+
     const addItem = () => {
         //addProduct(product,count)
         verifyReply(product,count)
@@ -53,9 +55,9 @@ const ItemDetail = ({ product }) => {
     }
 
 
-    //Estas funciones suman o restan, rango 1-5
+    //Estas funciones suman o restan, rango 1-stock
     const onAdd = () => {
-        if (count < 5) {
+        if (count < product.stock ) {
             setCount(count + 1)
         }
         
@@ -101,6 +103,7 @@ const ItemDetail = ({ product }) => {
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {product.name}
+                                       
                                       
                                     </Typography>
                                 

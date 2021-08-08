@@ -6,7 +6,7 @@ const ItemCartCount = (props) => {
             <button className='btn btn-danger  btn-sm' onClick={props.quit}>-</button>
            
           
-            <p className="display-4"> {props.quantity}</p>
+            <p className="display-4"> {props.quantity}/{props.stock}</p>
             <button className='btn btn-success  btn-sm' onClick={props.add}>+</button>
         </div>
     )

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import * as MdIcons from 'react-icons/md'
 import * as BsIcons from 'react-icons/bs'
 import ItemCartCount from './ItemCartCount'
+import Axios from 'axios'
+
 //PARA EL ACCORDION DE MUI
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
@@ -16,11 +18,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
 import {useCart} from '../../context/cart-context'
-
-
-require('./carrito.css')
+import('./carrito.css')
 //ESTILOS PROPIOS DADOS POR MUI PARA ACCORDION
 const Accordion = withStyles({
   root: {
@@ -40,7 +39,6 @@ const Accordion = withStyles({
   },
   expanded: {},
 })(MuiAccordion);
-
 
 const AccordionSummary = withStyles({
   root: {
@@ -69,11 +67,7 @@ const AccordionDetails = withStyles((theme) => ({
     background: '#383838'
   },
 }))(MuiAccordionDetails);
-
-
 //ESTILOS DADOS POR MUI PARA TABLA 
-
-
 const useStyles = makeStyles({
   table: {
     Width: '70%',
@@ -86,9 +80,9 @@ const useStyles = makeStyles({
 
 
 const CartItem = (props) => {
-  const {modifyProduct,removeProduct} = useCart()
+  const {modifyProduct,removeProduct, allProducts, cartProducts} = useCart()
   const classes = useStyles();
-
+  const [stockItem, setstockItem] = useState(0)
   const [quantityEdit, setQuantityEdit] = useState(props.quantity);
   
   const remove = () => {
@@ -100,26 +94,35 @@ const CartItem = (props) => {
       setQuantityEdit(quantityEdit - 1)
     }
      
-    //  console.log(cartProducts)
+   
   }
 
   const add = () => {
-    
-      setQuantityEdit(quantityEdit + 1)
-       
-      //  console.log(cartProducts)
+      if(quantityEdit < stockItem){
+         setQuantityEdit(quantityEdit + 1)
+      }
+      
   }
 
 
-  //No se por que este useEffect me da una advertencia
   useEffect(() => {
-   
       modifyProduct(props.id, quantityEdit)
-  
-   
-   
   }, [quantityEdit]);
 
+
+  //Este useEffect trae el stock del producto para limitar el count 
+  //Quiza se podria  optimizar con algun memo? lo intente pero no me funciono, de todas formas solo esta filtrando pocos productos
+  useEffect(() => {
+    
+    allProducts.forEach(product => {
+      if(product.id === props.id){
+        setstockItem(product.stock)
+      }
+    })
+   
+   
+  },[])
+  
   return (
 
 
@@ -156,9 +159,8 @@ const CartItem = (props) => {
 
                   <TableCell >Cantidad</TableCell>
                   <TableCell >
-                    {/* <input type="number"
-                    min="1" max="10" value={props.quantity} /> */}
-                      <ItemCartCount quantity={quantityEdit} quit={quit} add={add}/>
+                   
+                      <ItemCartCount stock={stockItem} quantity={quantityEdit} quit={quit} add={add}/>
                     
                     </TableCell>
                   
@@ -191,4 +193,4 @@ const CartItem = (props) => {
   )
 }
 
-export default CartItem
+export default React.memo(CartItem)

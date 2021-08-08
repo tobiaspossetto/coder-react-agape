@@ -35,11 +35,6 @@ export  function FirebaseProvider(props) {
   })
 
 
-//   const createTimestamp  = () =>{
-//         return firebase.firestore.Timestamp.fromDate(new Date())
-//   }
-
-
 
   
        
@@ -48,7 +43,7 @@ export  function FirebaseProvider(props) {
         if(user){
            
             setIsLogged(true)
-            console.log("ENTRO")
+            
            
             user.getIdToken(true)
                 .then((token) =>
@@ -63,7 +58,7 @@ export  function FirebaseProvider(props) {
         }else{
             setIsLogged(false)
             setUser({name: null, email: null, tokenId: null})
-           console.log("SALIO")
+           
         }
     })
   },[])

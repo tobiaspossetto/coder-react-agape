@@ -36,8 +36,10 @@ const NavBar = () => {
                 <Navbar.Toggle className="navbar-toggle" aria-controls="responsive-navbar-nav " />
                 <Navbar.Collapse id="responsive-navbar-nav ">
                     <Nav className="me-auto">
+        
 
                     {
+
 
                         //Mapeo el array links 
                     links.map((i,p ) =>{
