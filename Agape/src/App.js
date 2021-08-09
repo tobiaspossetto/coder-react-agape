@@ -17,6 +17,8 @@ function App() {
 
 
     //Uso Location de React Router en un context asi que necesito tener esto primero
+
+    //Esto del basename es para gh-pages, en produccion no se ve esa ruta repetida que se ve en el servidor de desarrollo
     <Router basename={process.env.PUBLIC_URL} className="App">
 
       <CartProvider>

@@ -9,6 +9,7 @@ const CartList = () => {
     const clear = () =>{
         removeAll()
     }
+    
     return (
         <>
             <div>

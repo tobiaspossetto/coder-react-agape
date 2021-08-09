@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import ItemDetail from './ItemDetail'
+import ModalError from './ModalError'
 import {useFirebase} from '../../context/firebase-context'
-import { useParams,useHistory  } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import('../../styles.css')
 import('./ItemDetail')
 
 const ItemDetailContainer = () => {
     
     const {allProducts} = useFirebase()
-    let history = useHistory();
+    
 
     
     //Trae el parametro id
@@ -16,7 +17,7 @@ const ItemDetailContainer = () => {
 
     //prod va a ser mi producto
     const [prod, setProd] = useState([])
-
+    const [patchError, setPatchError] = useState(false)
     
 
     useEffect(() => {
@@ -24,8 +25,10 @@ const ItemDetailContainer = () => {
             let prodDetail =  allProducts.filter(product => product.id === id)
             //Si esta vacio, significa que el id de la url es invalido
             if(prodDetail.length === 0) {
-                //me envia a la ruta /
-                history.push("/");
+                //Setea el state para que muestre el Modal
+                setPatchError(true)
+              
+               
             }else{
                     //Limpio el state  para que solo tenga un producto en detalle
             setProd([])
@@ -42,6 +45,10 @@ const ItemDetailContainer = () => {
         <div className='pages'>
             {/* Paso el state  */}
             <ItemDetail product={prod}/>
+
+            {
+                patchError&&   <ModalError/>
+            }
         </div>
     )
 }
