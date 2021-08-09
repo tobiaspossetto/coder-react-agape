@@ -6,7 +6,7 @@ Proyecto Final para el curso de React de la academia CoderHouse. La aplicación 
 ### Librerías y frameworks:
  * Libreria React-Icons para los iconos del sitio. Sitio oficial: https://react-icons.github.io/react-icons/
  * Estilos con React-Bootstrap y Material UI. La razón de usar ambos es que Bootstrap me permite agregar estilos rapidos con la propiedad ClassName ademas de sus componentes como Modal que son muy faciles de usar. Tambien incluí Material UI porque su componente Card esta preparada para que no se distorsione el tamaño de la imagen(Algo que no sucede con la card de Bootstrap). Ademas el componente acordion de Bootstrap generaba un error, por eso solo pude usar el de MaterialUI
- * Ruteo con React Route Dom
+ * Ruteo con React Router Dom
  * Libreria React Hook Forms para un manejo rapido del formulario y la verificación de los campos. Sitio oficial: https://react-hook-form.com/
  * Firebase para el backend
  
