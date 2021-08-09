@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 
 import { useParams,useHistory  } from 'react-router-dom';
 import ItemDetail from './ItemDetail'
-import {useCart} from '../../context/cart-context'
+import {useFirebase} from '../../context/firebase-context'
 
 require('../../styles.css')
 
 const ItemDetailContainer = () => {
     
-    const {allProducts} = useCart()
+    const {allProducts} = useFirebase()
     let history = useHistory();
 
     

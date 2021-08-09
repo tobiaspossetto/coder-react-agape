@@ -2,10 +2,10 @@ import React,{ useState, useEffect} from "react";
 
  
 
-import Axios from "axios"
+
 import {useFirebase} from './firebase-context'
 import { useLocation } from 'react-router-dom';
-import axios from "axios";
+
 const CartContext = React.createContext();
 
 
@@ -22,79 +22,10 @@ const { pathname } = useLocation();
 
     //DATA SECTION
 
-    const [allProducts, setAllProducts] = useState([]);
-    const [pedido, setpedido] = useState({})
-    const {user} = useFirebase()
-    const newPedido = (datosForm) =>{
-        let fecha = new Date()
-        let month = fecha.getMonth() + 1;
-        let day = fecha.getUTCDate();
-        let year = fecha.getUTCFullYear();
-
-        let fechaFinal = `${day}/${month}/${year}`
-       // setpedido({})
-        let newOrder = {
-            buyer:{
-                nombre: user.name,
-                email: user.email,
-                direccion: datosForm.direccion,
-                telefono: datosForm.telefono,
-            },
-            items:[
-                ...cartProducts,
-              
-            ],
-            date: fechaFinal,
-            totalPrice : total
-
-        }
-        setpedido(newOrder)
-        setCartProducts([])
-        axios.post(`https://agapeapp-7f28c-default-rtdb.firebaseio.com/orders/${user.uid}.json?auth=${user.tokenId}`,pedido)
-         .then(response =>
-         
-            setpedido(response.data.name))
-        .catch((error) => console.log(error))
-    }
+   
+   
+   
     
-
-
-    const getProdFirebase = async () =>{
-       
-       let data = await Axios.get('https://agapeapp-7f28c-default-rtdb.firebaseio.com/items.json')
-       let resData = data.data
-       
-        
-        let productosArray = []
-
-        let claves = Object.keys(resData)
-         for (let i = 0; i < claves.length; i++){
-             let clave = claves[i]
-            
-             productosArray.push(resData[clave])
-         }
-         
-        
-       
-         let productoFinal = []
-        for (let i = 0; i < productosArray.length; i++) {
-            
-            productoFinal.push({id:claves[i], name:productosArray[i].name, description: productosArray[i].description, price:productosArray[i].price, img: productosArray[i].img, category:productosArray[i].category, stock:productosArray[i].stock})
-            
-        }
-       
-       setAllProducts(productoFinal)
-    }
-
-    
-  
-    
-    
-    useEffect(() =>{
-        getProdFirebase()
-       
-     
-    },[])
 
 
    
@@ -108,15 +39,18 @@ const { pathname } = useLocation();
     const [cartProducts, setCartProducts] = useState([])
     const [total, setTotal] = useState(0);
     const [totalItems, setTotalItems] = useState(0)
-   
+      
+    const totalItemsFunc = () =>{
+        let itemsTotal = 0
+        cartProducts.forEach(i => {
+            itemsTotal = itemsTotal + i.quantity
+        });
+  
+        setTotalItems(itemsTotal)
+    }
     useEffect(() =>{
       
-            let itemsTotal = 0
-           cartProducts.forEach(i => {
-               itemsTotal = itemsTotal + i.quantity
-           });
-     
-           setTotalItems(itemsTotal)
+        totalItemsFunc()
      
            
       
@@ -162,11 +96,13 @@ const { pathname } = useLocation();
        finalPrice()
        
          setCartProducts(modify)
+         totalItemsFunc()
        
     }
 
     //modificar desde el componente carrito
-    const addProductExistent =  (newProduct,cant) => {
+   
+    const addProductExistent = (newProduct,cant) => {
 
         let modify = cartProducts
         
@@ -179,7 +115,7 @@ const { pathname } = useLocation();
            
         });
        // finalPrice()
-       
+       totalItemsFunc()
          setCartProducts(modify)
         
     }
@@ -242,9 +178,8 @@ const { pathname } = useLocation();
         verifyReply,
         removeAll,
         total,
-        totalItems,
-        allProducts,
-        newPedido,
+        totalItems
+       
        
        
         

@@ -19,9 +19,9 @@ const Formulario = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
   
-  const { total, cartProducts, newPedido, verificar } = useCart()
+  const { total, cartProducts  } = useCart()
   const classes = useStyles();
-  const { isLogged, authGoogle, user } = useFirebase()
+  const { isLogged, authGoogle, user,newPedido } = useFirebase()
 
 
 

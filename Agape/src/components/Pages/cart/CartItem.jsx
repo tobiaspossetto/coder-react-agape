@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import * as MdIcons from 'react-icons/md'
 import * as BsIcons from 'react-icons/bs'
 import ItemCartCount from './ItemCartCount'
-import Axios from 'axios'
+
 
 //PARA EL ACCORDION DE MUI
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -19,6 +19,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {useCart} from '../../context/cart-context'
+import {useFirebase} from '../../context/firebase-context'
 import('./carrito.css')
 //ESTILOS PROPIOS DADOS POR MUI PARA ACCORDION
 const Accordion = withStyles({
@@ -80,7 +81,8 @@ const useStyles = makeStyles({
 
 
 const CartItem = (props) => {
-  const {modifyProduct,removeProduct, allProducts, cartProducts} = useCart()
+  const {modifyProduct,removeProduct} = useCart()
+  const {allProducts} = useFirebase()
   const classes = useStyles();
   const [stockItem, setstockItem] = useState(0)
   const [quantityEdit, setQuantityEdit] = useState(props.quantity);

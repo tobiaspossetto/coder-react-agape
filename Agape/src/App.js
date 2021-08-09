@@ -18,12 +18,13 @@ function App() {
 
 
   return (
-    <FirebaseProvider>
 
 
 
-      <Router basename={process.env.PUBLIC_URL} className="App">
-        <CartProvider>
+
+    <Router basename={process.env.PUBLIC_URL} className="App">
+      <CartProvider>
+        <FirebaseProvider>
 
           <NavBar />
 
@@ -44,10 +45,18 @@ function App() {
 
           <Footer />
 
-        </CartProvider>
-      </Router>
+        </FirebaseProvider>
 
-    </FirebaseProvider>
+
+      </CartProvider>
+
+
+
+
+    </Router>
+
+
+
 
 
   );

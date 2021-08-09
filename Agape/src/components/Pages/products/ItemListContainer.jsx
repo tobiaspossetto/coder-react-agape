@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useCart} from '../../context/cart-context'
+import {useFirebase} from '../../context/firebase-context'
 import ItemList from './ItemList'
 import { useParams,useLocation } from 'react-router-dom';
 import('../../styles.css')
@@ -10,7 +10,7 @@ const ItemListContainer = () => {
     //estado donde guardo los productos
     const [products, setProducts] = useState([]);
    
-    const {allProducts} = useCart()
+    const {allProducts} = useFirebase()
     const { pathname } = useLocation();
     useEffect(() => {
         window.scrollTo(0, 0);

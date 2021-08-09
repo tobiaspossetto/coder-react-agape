@@ -3,7 +3,9 @@ import React,{ useState, useEffect} from "react";
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth';
+import { useCart } from './cart-context'
 
+import Axios from 'axios'
 
 
 
@@ -25,6 +27,9 @@ const  provider = new firebase.auth.GoogleAuthProvider();
 
 
 export  function FirebaseProvider(props) {
+
+    const { total, cartProducts,removeAll } = useCart()
+
   const [isLogged, setIsLogged] = useState(false);
  
   const [user, setUser] = useState({
@@ -33,6 +38,114 @@ export  function FirebaseProvider(props) {
       tokenId: null,
       uid: null
   })
+
+
+
+
+  const [allProducts, setAllProducts] = useState([]);
+  const [pedido, setpedido] = useState({})
+  const [idPedido, setidPedido] = useState('');
+ const newPedido = async (datosForm) =>{
+         let fecha = new Date()
+         let month = fecha.getMonth() + 1;
+         let day = fecha.getUTCDate();
+         let year = fecha.getUTCFullYear();
+ 
+         let fechaFinal = `${day}/${month}/${year}`
+        // setpedido({})
+         let newOrder = {
+             buyer:{
+                 nombre: user.name,
+                 email: user.email,
+                 direccion: datosForm.direccion,
+                 telefono: datosForm.telefono,
+             },
+             items:[
+                 ...cartProducts,
+               
+             ],
+             date: fechaFinal,
+             totalPrice : total
+ 
+         }
+         setpedido(newOrder)
+        
+         Axios.post(`https://agapeapp-7f28c-default-rtdb.firebaseio.com/orders/${user.uid}.json?auth=${user.tokenId}`,pedido)
+          .then(response =>
+             setidPedido(response.data.name))
+
+         .catch((error) => console.log(error))
+           updateStock()
+        
+        
+     }
+     
+      const updateStock = () =>{
+
+        cartProducts.forEach(cartI => {
+            let prod = allProducts.filter(allP => allP.id === cartI.item.id)
+            let newStock = {stock:prod[0].stock - cartI.quantity}
+            //console.log(newStock)
+            Axios.patch(`https://agapeapp-7f28c-default-rtdb.firebaseio.com/items/${cartI.item.id}.json`, newStock)
+                        .then((result) => {
+                            console.log(result)
+                            removeAll()
+                            getProdFirebase()
+                          
+                        }).catch((err) => {
+                            console.log(err)
+                        });
+        })
+
+      
+      }
+ 
+ 
+     const getProdFirebase = async () =>{
+        
+        let data = await Axios.get('https://agapeapp-7f28c-default-rtdb.firebaseio.com/items.json')
+        let resData = data.data
+        
+         
+         let productosArray = []
+ 
+         let claves = Object.keys(resData)
+          for (let i = 0; i < claves.length; i++){
+              let clave = claves[i]
+             
+              productosArray.push(resData[clave])
+          }
+          
+         
+        
+          let productoFinal = []
+         for (let i = 0; i < productosArray.length; i++) {
+             
+             productoFinal.push({id:claves[i], name:productosArray[i].name, description: productosArray[i].description, price:productosArray[i].price, img: productosArray[i].img, category:productosArray[i].category, stock:productosArray[i].stock})
+             
+         }
+        
+        setAllProducts(productoFinal)
+     }
+ 
+     
+   
+     
+     
+     useEffect(() =>{
+         getProdFirebase()
+        
+      
+     },[])
+
+
+
+
+
+
+
+
+
 
 
 
@@ -96,17 +209,18 @@ const signOut = () => {
     })
    
 }
-const getFirestore = () => {
-    //retorna el acceso al servicio firestore
-    return firebase.firestore(app)
-}
+
 
     return <FirebaseContext.Provider value={{
         authGoogle,
-        getFirestore,
+      
         isLogged,
         signOut,
-        user
+        user,
+        allProducts,
+        newPedido,
+        idPedido,
+        setidPedido
         
     }} {...props} />
 }

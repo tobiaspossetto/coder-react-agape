@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import { Toast } from 'react-bootstrap';
 
 import {useCart} from '../../context/cart-context'
-
+import {useFirebase} from '../../context/firebase-context'
 //Propio de Material UI
 const useStyles = makeStyles({
     root: {
@@ -44,14 +44,14 @@ const ItemDetail = ({ product }) => {
 
 
     const {verifyReply} = useCart()
-
+    const {setidPedido} = useFirebase()
    
 
     const addItem = () => {
         //addProduct(product,count)
         verifyReply(product,count)
+       
         addProd()
-      
     }
 
 
@@ -71,6 +71,7 @@ const ItemDetail = ({ product }) => {
     //funcion para verificar si se hizo click en agregar al carrito y renderizar el link
 
     const addProd = () => {
+        setidPedido('')
         setAdd(true)
         setShow(true)
     }
@@ -116,8 +117,14 @@ const ItemDetail = ({ product }) => {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions className='d-flex justify-content-between'>
-                                <ItemCount valor={count} sumar={onAdd} restar={onQuit} />
-                                <button className='shadow-lg btn btn-warning' onClick={addItem}>Agregar al carrito</button>
+                                {
+                                    product.stock <= 0?<p>Sin stock</p> :
+                                    <>
+                                        <ItemCount valor={count} sumar={onAdd} restar={onQuit} />
+                                        <button className='shadow-lg btn btn-warning' onClick={addItem}>Agregar al carrito</button>
+                                    </>
+                                }
+                              
                             </CardActions>
                         </Card>
                         {add === false ? <div></div> :
