@@ -1,7 +1,7 @@
 # Agape App
 
 ## Descripción
-Proyecto Final para el curso de React de la academia CoderHouse. La aplicación permite conectarse con un backend realizdo con Firebase. Permite seleccionar ciertos productos, navegar a sus detalles, agregarlos al carrito, poder acceder a él, simular la compra de los productos. Para guardar el pedido de compra es necesario ingresar con una cuenta de Google y completar un formulario.
+Proyecto Final para el curso de React de la academia CoderHouse. La aplicación permite conectarse con un backend realizdo con Firebase. Permite seleccionar ciertos productos, navegar a sus detalles, agregarlos al carrito, poder acceder a él, simular la compra de los productos. Para guardar el pedido de compra es necesario ingresar con una cuenta de Google y completar un formulario. Video que muestra el recorrido de la app: https://drive.google.com/file/d/1WGBML8fexDxKZ07aNrThTRbesL17aKM1/view?usp=sharing
 
 ### Librerías y frameworks:
  * Libreria React-Icons para los iconos del sitio. Sitio oficial: https://react-icons.github.io/react-icons/
