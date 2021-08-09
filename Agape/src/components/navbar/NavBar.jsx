@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import links from './links'
 import LinkWidget from './LinkWidget'
-import { Container, Figure, Nav, Navbar } from 'react-bootstrap'
 import {useFirebase} from '../context/firebase-context'
+//Importaciones de bootstrap
+import { Container, Figure, Nav, Navbar } from 'react-bootstrap'
 import * as FcIcons from 'react-icons/fc'
 import('./nav.css')
 const NavBar = () => {
@@ -36,10 +37,7 @@ const NavBar = () => {
                 <Navbar.Toggle className="navbar-toggle" aria-controls="responsive-navbar-nav " />
                 <Navbar.Collapse id="responsive-navbar-nav ">
                     <Nav className="me-auto">
-        
-
                     {
-
 
                         //Mapeo el array links 
                     links.map((i,p ) =>{

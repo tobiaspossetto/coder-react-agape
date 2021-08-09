@@ -1,5 +1,5 @@
 import React from 'react'
-
+import('./details.css')
 const ItemCount = (props) => {
     return (
         <div className="countdetail-container">

@@ -5,15 +5,13 @@ import {Link} from 'react-router-dom';
 const CartList = () => {
 
     const { cartProducts,removeAll } = useCart()
-
+    //Funcion que va a borrar el carrito, llamar directamente a removeAll no funciona;
     const clear = () =>{
         removeAll()
     }
     return (
         <>
             <div>
-
-
 
                 {
                     cartProducts.length === 0 ? <h4 className='text-center mb-3 text-danger  '>No hay productos</h4> :
@@ -42,7 +40,7 @@ const CartList = () => {
 
             <div className='w-100 d-flex align-items-center justify-content-center'>
             {
-                cartProducts.length === 0 ? <Link className='btn btn-warning' to={'/productos/'}>Comenzá a comprar</Link> :
+                cartProducts.length === 0 ? <Link className='btn btn-warning' to={'/'}>Comenzá a comprar</Link> :
                 <button className='btn btn-danger  w-50' onClick={clear}>Borrar todo</button>
             }
             

@@ -3,7 +3,6 @@ import React,{ useState, useEffect} from "react";
  
 
 
-import {useFirebase} from './firebase-context'
 import { useLocation } from 'react-router-dom';
 
 const CartContext = React.createContext();

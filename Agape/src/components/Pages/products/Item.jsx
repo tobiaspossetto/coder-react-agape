@@ -1,23 +1,14 @@
-
 import React from 'react'
-
 import {Link} from 'react-router-dom';
-
-
 //MATERIAL UI
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-
 import Typography from '@material-ui/core/Typography';
-
+//css
 import('../../styles.css')
-
-
 
 //UTILIZA MATERIAL UI, HAY COSAS COMO useStyles que son propios de la libreria
 
@@ -56,7 +47,7 @@ const useStyles = makeStyles({
                     </CardContent>
                
                 <CardActions className='p-3 d-flex justify-content-between align-items-center'>
-                    <Link className='btn btn-danger' to={'/productos/item/'+props.prodID}>Ver más</Link>
+                    <Link className='btn btn-danger' to={'/item/'+props.prodID}>Ver más</Link>
                
                     <span >
                     {props.cat}

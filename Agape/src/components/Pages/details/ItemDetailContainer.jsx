@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-
-import { useParams,useHistory  } from 'react-router-dom';
 import ItemDetail from './ItemDetail'
 import {useFirebase} from '../../context/firebase-context'
-
-require('../../styles.css')
+import { useParams,useHistory  } from 'react-router-dom';
+import('../../styles.css')
+import('./ItemDetail')
 
 const ItemDetailContainer = () => {
     
@@ -15,19 +14,18 @@ const ItemDetailContainer = () => {
     //Trae el parametro id
     const { id } = useParams();
 
+    //prod va a ser mi producto
     const [prod, setProd] = useState([])
 
     
 
     useEffect(() => {
-
-        const getById =   () => {
-            //hace la llamada pasando id
-           
+        //filtra mi array del cart(allProducts)
             let prodDetail =  allProducts.filter(product => product.id === id)
+            //Si esta vacio, significa que el id de la url es invalido
             if(prodDetail.length === 0) {
-                
-                history.push("/productos");
+                //me envia a la ruta /
+                history.push("/");
             }else{
                     //Limpio el state  para que solo tenga un producto en detalle
             setProd([])
@@ -35,23 +33,9 @@ const ItemDetailContainer = () => {
             //Lo resolvi con el spread ...
             setProd(...prodDetail)
             }
-          
-         
             
-        }
-
-
-       //Siguiendo al parametro se ejecuta
-      getById()
-      
-       
-      
-     
-        
-      
-        
-       
-    });
+        //React me advierte que en dependencies tambien va history y allProducts pero me anda bien con id
+    },[id]);
    
    
     return (

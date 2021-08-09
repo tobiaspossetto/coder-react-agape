@@ -1,18 +1,7 @@
 import React from 'react'
-
 import Item from './Item'
 
-
 const ItemList = (props) => {
-
-    
-
-   
-    
-   
-      
-       
-
 
     return (
         <div className="container-fluid pt-5">

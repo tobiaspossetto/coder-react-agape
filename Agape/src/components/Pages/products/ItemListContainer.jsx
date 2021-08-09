@@ -1,31 +1,34 @@
 import React, {useState, useEffect} from 'react'
 import {useFirebase} from '../../context/firebase-context'
 import ItemList from './ItemList'
-import { useParams,useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import('../../styles.css')
+
+
 const ItemListContainer = () => {
+    //Mis productos desde el context
+    const {allProducts} = useFirebase()
+
+
     //traigo category
     const { category } = useParams();
     
     //estado donde guardo los productos
     const [products, setProducts] = useState([]);
    
-    const {allProducts} = useFirebase()
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-      }, [pathname]);
+    
+    
 
     
     useEffect(()=>{ 
         const getProducts =  () =>{
             //Si llega un parametro de category entonces
             if(category){
-               
+               //Filtro mi allProducts
               let prodByCat = allProducts.filter(product => product.category === category)
               setProducts(prodByCat)
             }else{
-                
+                //mis productos van a tener mi allProducts completo
                 setProducts(allProducts)
               
             }
@@ -40,7 +43,7 @@ const ItemListContainer = () => {
 
 
 
-    //ESTE COMPONENTE PARA MI ESTA AL VICIO, PERO ES PARA CUMPLIR CON LA CONSIGNA
+  
     return (
         <div className="pages">
             <ItemList products={products}/>

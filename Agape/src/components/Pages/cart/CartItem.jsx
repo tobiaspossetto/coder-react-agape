@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react'
+import ItemCartCount from './ItemCartCount'
+import {useCart} from '../../context/cart-context'
+import {useFirebase} from '../../context/firebase-context'
+//React Icons
 import * as MdIcons from 'react-icons/md'
 import * as BsIcons from 'react-icons/bs'
-import ItemCartCount from './ItemCartCount'
-
-
-//PARA EL ACCORDION DE MUI
+//PARA EL ACCORDION DE Material UI
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 
-//TABLA
+//TABLA de Material UI
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,8 +19,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {useCart} from '../../context/cart-context'
-import {useFirebase} from '../../context/firebase-context'
+
 import('./carrito.css')
 //ESTILOS PROPIOS DADOS POR MUI PARA ACCORDION
 const Accordion = withStyles({
@@ -76,21 +76,37 @@ const useStyles = makeStyles({
 });
 
 
-
-
-
-
 const CartItem = (props) => {
+  const classes = useStyles();
   const {modifyProduct,removeProduct} = useCart()
   const {allProducts} = useFirebase()
-  const classes = useStyles();
+
+
   const [stockItem, setstockItem] = useState(0)
+  //Contador del item, comienza con la cantidad agregada
   const [quantityEdit, setQuantityEdit] = useState(props.quantity);
   
+
+  //Este useEffect trae el stock del producto para limitar el count 
+  //Quiza se podria  optimizar con algun memo? lo intente pero no me funciono, de todas formas solo esta filtrando pocos productos
+  useEffect(() => {
+    
+    allProducts.forEach(product => {
+      if(product.id === props.id){
+        setstockItem(product.stock)
+      }
+    })
+   
+   
+  },[])
+
+
   const remove = () => {
+    //Llama a la funcion y le pasa el id del producto a remover
     removeProduct(props.id)
   }
  
+  //Funciones para el contador
   const quit = () => {
     if(quantityEdit>1){
       setQuantityEdit(quantityEdit - 1)
@@ -107,26 +123,15 @@ const CartItem = (props) => {
   }
 
 
+  //Cuando modifico el count modifica la cantidad del producto
   useEffect(() => {
       modifyProduct(props.id, quantityEdit)
   }, [quantityEdit]);
 
 
-  //Este useEffect trae el stock del producto para limitar el count 
-  //Quiza se podria  optimizar con algun memo? lo intente pero no me funciono, de todas formas solo esta filtrando pocos productos
-  useEffect(() => {
-    
-    allProducts.forEach(product => {
-      if(product.id === props.id){
-        setstockItem(product.stock)
-      }
-    })
-   
-   
-  },[])
+  
   
   return (
-
 
     <div className='item  '>
       <Accordion square  >
@@ -195,4 +200,4 @@ const CartItem = (props) => {
   )
 }
 
-export default React.memo(CartItem)
+export default CartItem

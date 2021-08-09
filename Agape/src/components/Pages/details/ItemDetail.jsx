@@ -1,24 +1,25 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState} from 'react'
 import ItemCount from './ItemCount'
+import {useCart} from '../../context/cart-context'
+import {useFirebase} from '../../context/firebase-context'
+import { Link } from 'react-router-dom';
+
+//Importacion de bootstrap
+import { Toast } from 'react-bootstrap';
+
+//Importaciones de MaterialUI
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-
 import Typography from '@material-ui/core/Typography';
 
-
-
+//Importaciones de React icons
 import * as MdIcons from 'react-icons/md'
 import * as GiIcons from 'react-icons/gi'
-import { Link } from 'react-router-dom';
 
-import { Toast } from 'react-bootstrap';
-
-import {useCart} from '../../context/cart-context'
-import {useFirebase} from '../../context/firebase-context'
 //Propio de Material UI
 const useStyles = makeStyles({
     root: {
@@ -27,31 +28,25 @@ const useStyles = makeStyles({
 });
 
 
-
 const ItemDetail = ({ product }) => {
-  
-    
-    
     const classes = useStyles();
-
-    //state para el contador
-    const [count, setCount] = useState(1);
-
-    const [show, setShow] = useState(false);
-
-    const [add, setAdd] = useState(false);
-
-
 
     const {verifyReply} = useCart()
     const {setidPedido} = useFirebase()
-   
+    //state para el contador, siempre desdde 1
+    const [count, setCount] = useState(1);
+    //states para el Toast de bootstrap y el btn para ir al cart
+    const [show, setShow] = useState(false);
+    const [add, setAdd] = useState(false);
 
     const addItem = () => {
-        //addProduct(product,count)
+       //Si se añadio un producto llamo a la funcion verifyReply, que se encarga de reemplazar o agregar
         verifyReply(product,count)
-       
-        addProd()
+       //borro el mensaje de id si es que habia un pedido anterior
+        setidPedido('')
+        //Muestro el Toast y el btn
+        setAdd(true)
+        setShow(true)
     }
 
 
@@ -68,21 +63,9 @@ const ItemDetail = ({ product }) => {
         }
     }
 
-    //funcion para verificar si se hizo click en agregar al carrito y renderizar el link
-
-    const addProd = () => {
-        setidPedido('')
-        setAdd(true)
-        setShow(true)
-    }
-
 
     return (
         <>
-
-
-
-
 
             <div className="container-fluid pt-5 pb-5 ">
 
@@ -127,16 +110,13 @@ const ItemDetail = ({ product }) => {
                               
                             </CardActions>
                         </Card>
-                        {add === false ? <div></div> :
+                        {add === true &&
                             <div className='d-flex justify-content-center align-items-center mt-3'>
                                 <Link to='/carrito' className='btn btn-warning  w-80 d-flex justify-content-center align-items-center'><GiIcons.GiClick size={20} />  <span className='font-weight-bold  ml-1 mb-0'>Finalizá tu compra</span></Link>
                             </div>
 
                         }
                         
-
-
-
                     </div>
 
                 </div>
@@ -150,11 +130,8 @@ const ItemDetail = ({ product }) => {
                                 Puede editar su compra en el carrito
                             </Toast.Body>
                            
-
                 </Toast>
             </div>
-
-
 
         </>
     )
